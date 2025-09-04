@@ -69,28 +69,7 @@ export async function activate(context: vscode.ExtensionContext) {
         const folderName = RULE_FOLDER_MAP[editorType];
         let folderPath: string;
 
-        if (folderName === '') { // Windsurf 规则在根目录
-            folderPath = workspaceRoot;
-            // 为 Windsurf 创建专门的监听器
-            const windsurfWatcher = vscode.workspace.createFileSystemWatcher(
-                new vscode.RelativePattern(folderPath, '.windsurfrules*'),
-                false, false, false
-            );
-            context.subscriptions.push(windsurfWatcher);
-
-            windsurfWatcher.onDidChange(uri => {
-                console.log(`[${editorType}] 文件改变: ${uri.fsPath}`);
-                refreshRulesList();
-            });
-            windsurfWatcher.onDidCreate(uri => {
-                console.log(`[${editorType}] 文件创建: ${uri.fsPath}`);
-                refreshRulesList();
-            });
-            windsurfWatcher.onDidDelete(uri => {
-                console.log(`[${editorType}] 文件删除: ${uri.fsPath}`);
-                refreshRulesList();
-            });
-        } else {
+        {
             folderPath = path.join(workspaceRoot, folderName);
             // 为其他编辑器类型创建多个监听器，监听所有支持的文件格式
             for (const extension of SUPPORTED_RULE_EXTENSIONS) {

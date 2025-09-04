@@ -4,11 +4,16 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue.svg)
 
+[中文](./README.md)
+[English](./README_EN.md)
+
 🚀 **一个强大的 VS Code 扩展，用于统一管理多种 AI 编程工具的规则文件**
 
 支持 Cursor、Cline、VS Code Copilot、Windsurf 等主流 AI 编程工具的规则管理，提供云端同步、标签分类、一键添加到本地等功能。
 
 [Changelog](/CHANGELOG.md)
+
+[参考用例](/EXAMPLES.md)
 
 ## ✨ 核心特性
 
@@ -21,7 +26,7 @@
 - **Cursor 规则**：管理 `.cursor/rules/` 下的规则文件
 - **Cline 规则**：管理 `.clinerules/` 下的规则文件
 - **VS Code Copilot 规则**：管理 `.github/` 下的规则文件
-- **Windsurf 规则**：管理根目录下的 `.windsurfrules*` 文件
+- **Windsurf 规则**：管理 `.windsurf/rules/` 下的规则文件
 
 ### 📄 **多格式文件支持**
 - **Markdown** (`.md`) - 传统文档格式
@@ -61,8 +66,8 @@
    - 输入文件名（自动验证长度和字符合法性）
    - 开始编写你的规则内容
 
-3. **保存为全局规则**
-   - 点击项目规则旁的 "保存到全局规则" 按钮
+3. **保存规则到云端**
+   - 点击项目规则旁的 "保存到云端" 按钮
    - 添加标签便于分类管理
    - 规则将自动同步到云端
 
@@ -73,9 +78,9 @@
 - **快速编辑**：点击即可打开规则文件进行编辑
 - **智能创建**：根据当前项目环境智能推荐规则类型
 
-### 全局规则库
-- **规则收藏**：将优秀的项目规则保存到全局库
-- **跨项目复用**：在任何项目中快速应用全局规则
+### 云端规则库
+- **规则收藏**：将优秀的项目规则保存到远程库
+- **跨项目复用**：在任何项目中快速应用规则
 - **版本管理**：自动记录规则的创建和修改时间
 
 ### 同步功能
@@ -90,7 +95,7 @@
 | **Cursor** | `.cursor/rules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Cursor AI 编程助手规则 |
 | **Cline** | `.clinerules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Cline AI 助手规则 |
 | **VS Code Copilot** | `.github/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | GitHub Copilot 规则 |
-| **Windsurf** | 根目录 | `.windsurfrules` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Windsurf AI 规则 |
+| **Windsurf** | `.windsurf/rules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Windsurf AI 规则 |
 
 ### 📝 文件格式特性
 - **灵活格式选择**：用户可自由选择任意文件格式
@@ -123,7 +128,7 @@
 
 ### 团队协作
 - **规则标准化**：团队成员共享统一的 AI 规则标准
-- **最佳实践分享**：通过全局规则分享团队最佳实践
+- **最佳实践分享**：通过规则分享团队最佳实践
 - **新人快速上手**：新团队成员快速获取项目规则配置
 
 ### 企业应用

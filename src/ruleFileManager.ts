@@ -17,7 +17,7 @@ export class RuleFileManagerImpl implements RuleFileManager {
 
     public async initializeRuleDirectory(editorType: EditorType): Promise<void> {
         const rulesDirectory = this.getRulesPath(editorType);
-        // 如果 folderName 为空，则不创建目录，因为文件直接在根目录
+        // 如果规则目录不是工作区根目录且不存在，则创建目录
         if (rulesDirectory !== this.workspaceRoot && !fs.existsSync(rulesDirectory)) {
             fs.mkdirSync(rulesDirectory, { recursive: true });
         }
@@ -78,13 +78,8 @@ export class RuleFileManagerImpl implements RuleFileManager {
                 const files = fs.readdirSync(rulesDirectory);
                 let filteredFiles: string[] = [];
 
-                if (editorType === EditorType.Windsurf) {
-                    // 对于 Windsurf 类型，查找以 .windsurfrules 开头的文件（支持 .windsurfrules, .windsurfrules_1 等）
-                    filteredFiles = files.filter(file => file.startsWith('.windsurfrules'));
-                } else {
-                    // 对于其他类型，查找所有支持的规则文件格式
-                    filteredFiles = files.filter(file => isSupportedRuleFile(file));
-                }
+                // 对于所有类型，查找所有支持的规则文件格式
+                filteredFiles = files.filter(file => isSupportedRuleFile(file));
 
                 // 对于根目录下的文件，需要排除特定的非规则文件
                 if (rulesDirectory === this.workspaceRoot) {

@@ -13,7 +13,7 @@ export const RULE_FOLDER_MAP: Record<EditorType, string> = {
     [EditorType.Cline]: '.clinerules',
     [EditorType.Cursor]: '.cursor/rules',
     [EditorType.VSCodeCopilot]: '.github', // VS Code / GitHub Copilot 规则在 .github 文件夹下
-    [EditorType.Windsurf]: '',
+    [EditorType.Windsurf]: '.windsurf/rules',
 };
 
 // 支持的规则文件扩展名

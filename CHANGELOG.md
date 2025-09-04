@@ -10,11 +10,11 @@
 ### 🎉 新增功能
 - **多平台规则支持**：支持 Cursor、Cline、VS Code Copilot、Windsurf 四种 AI 编程工具
 - **可视化管理面板**：直观的 Web 界面管理所有规则文件
-- **全局规则同步**：基于 VS Code Settings Sync 的云端同步功能
+- **规则同步**：基于 VS Code Settings Sync 的云端同步功能
 - **智能规则分类**：自动识别规则类型并分类显示
 - **标签系统**：为规则添加最多 5 个自定义标签便于管理
 - **快速搜索**：支持按名称、标签、来源快速查找规则
-- **一键部署**：将全局规则一键添加到当前项目
+- **一键添加**：将云端保存的规则一键添加到当前项目
 - **自动文件夹创建**：根据规则类型自动创建对应文件夹
 
 ### 🔧 技术特性
@@ -27,7 +27,7 @@
 - **Cursor 规则**：`.cursor/rules/*`
 - **Cline 规则**：`.clinerules/*`
 - **VS Code Copilot 规则**：`.github/*`
-- **Windsurf 规则**：`.windsurfrules`
+- **Windsurf 规则**：`.windsurf/rules/*`
 
 ### 🛠️ 开发工具
 - **ESLint 集成**：代码质量检查

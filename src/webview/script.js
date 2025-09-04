@@ -22,7 +22,7 @@ function renderGlobalRules(globalRules) {
 
     globalRulesList.innerHTML = '';
     if (globalRules.length === 0) {
-        globalRulesList.innerHTML = '<li>没有找到全局规则。</li>';
+        globalRulesList.innerHTML = '<li>没有找到远程规则。</li>';
     } else {
         globalRules.forEach(rule => {
             const li = document.createElement('li');
@@ -213,13 +213,8 @@ try {
     // 根据规则类型显示/隐藏文件格式选择
     function updateFileFormatVisibility() {
         if (ruleTypeSelect && fileFormatGroup) {
-            const selectedType = ruleTypeSelect.value;
-            if (selectedType === 'Windsurf') {
-                // Windsurf 规则不需要选择文件格式
-                fileFormatGroup.style.display = 'none';
-            } else {
-                fileFormatGroup.style.display = 'block';
-            }
+            // 所有规则类型都显示文件格式选择
+            fileFormatGroup.style.display = 'block';
         }
     }
 
@@ -232,7 +227,7 @@ try {
     if (createButton && ruleTypeSelect && fileFormatSelect) {
         createButton.addEventListener('click', () => {
             const selectedEditorType = ruleTypeSelect.value;
-            const selectedFileFormat = selectedEditorType === 'Windsurf' ? null : fileFormatSelect.value;
+            const selectedFileFormat = fileFormatSelect.value;
 
             if (projectRulesLoading) {
                 projectRulesLoading.style.display = 'block';

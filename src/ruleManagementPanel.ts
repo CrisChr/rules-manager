@@ -128,26 +128,20 @@ export class RuleManagementPanelImpl {
 
                         let ruleName = await vscode.window.showInputBox({
                             prompt: `请输入新规则的文件名 (例如: my-rule)`,
-                            placeHolder: selectedEditorType === EditorType.Windsurf ? '.windsurfrules' : 'my-rule',
+                            placeHolder: 'my-rule',
                             validateInput: validateFileName
                         });
                         if (ruleName) {
-                            // 根据编辑器类型确定文件扩展名
-                            if (selectedEditorType === EditorType.Windsurf) {
-                                // Windsurf 规则文件统一命名为 .windsurfrules
-                                ruleName = '.windsurfrules';
-                            } else {
-                                // 移除现有扩展名（如果有的话）
-                                const nameWithoutExt = ruleName.replace(/\.[^/.]+$/, '');
-                                // 使用用户选择的文件格式，如果没有选择则默认使用 .md
-                                const fileExtension = selectedFileFormat || '.md';
-                                ruleName = nameWithoutExt + fileExtension;
-                            }
+                            // 移除现有扩展名（如果有的话）
+                            const nameWithoutExt = ruleName.replace(/\.[^/.]+$/, '');
+                            // 使用用户选择的文件格式，如果没有选择则默认使用 .md
+                            const fileExtension = selectedFileFormat || '.md';
+                            ruleName = nameWithoutExt + fileExtension;
 
                             // 根据文件格式生成适当的初始内容
                             let initialContent = '';
-                            const fileExtension = ruleName.substring(ruleName.lastIndexOf('.'));
-                            switch (fileExtension) {
+                            const ruleFileExtension = ruleName.substring(ruleName.lastIndexOf('.'));
+                            switch (ruleFileExtension) {
                                 case '.md':
                                     initialContent = '# 新规则\n\n请在此处编写您的规则内容。';
                                     break;
@@ -206,7 +200,7 @@ export class RuleManagementPanelImpl {
                             const content = await this.fileManager.getRuleContent(message.ruleName, message.editorType);
                             if (content !== undefined) {
                                 const globalRuleName = await vscode.window.showInputBox({
-                                    prompt: `请输入全局规则的名称 (默认为 ${message.ruleName})`,
+                                    prompt: `请输入要保存的规则名称 (默认为 ${message.ruleName})`,
                                     value: message.ruleName
                                 });
 
@@ -232,13 +226,13 @@ export class RuleManagementPanelImpl {
                                     }
 
                                     await this.globalRuleManager.saveGlobalRule(globalRuleName, content, tags, message.editorType); // 传递 editorType
-                                    vscode.window.showInformationMessage(`规则 "${globalRuleName}" 已保存为全局规则！`);
+                                    vscode.window.showInformationMessage(`规则 "${globalRuleName}" 已保存规则！`);
                                     this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                                 } else { // 如果用户按 Esc 取消
                                     if (isExistingGlobalRule) {
                                         // 如果是已存在的全局规则，并且用户取消了，则删除它
                                         await this.globalRuleManager.deleteGlobalRule(message.ruleName);
-                                        vscode.window.showInformationMessage(`全局规则 "${message.ruleName}" 已取消保存并删除。`);
+                                        vscode.window.showInformationMessage(`规则 "${message.ruleName}" 已取消保存并删除。`);
                                         this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                                     }
                                 }
@@ -250,10 +244,10 @@ export class RuleManagementPanelImpl {
                     }
                     case 'deleteGlobalRule': {
                         if (message.ruleName) {
-                            const confirm = await vscode.window.showWarningMessage(`确定要删除全局规则 "${message.ruleName}" 吗？`, { modal: true }, '删除', '取消');
+                            const confirm = await vscode.window.showWarningMessage(`确定要删除规则 "${message.ruleName}" 吗？`, { modal: true }, '删除', '取消');
                             if (confirm === '删除') {
                                 await this.globalRuleManager.deleteGlobalRule(message.ruleName);
-                                vscode.window.showInformationMessage(`全局规则 "${message.ruleName}" 删除成功！`);
+                                vscode.window.showInformationMessage(`规则 "${message.ruleName}" 删除成功！`);
                                 this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                             }
                         }
@@ -267,13 +261,13 @@ export class RuleManagementPanelImpl {
                                     // 使用全局规则自己的 editorType，如果没有则使用当前检测到的类型作为 fallback
                                     const targetEditorType = globalRule.editorType || this.currentEditorType;
                                     await this.fileManager.addRuleFromContent(globalRule.name, globalRule.content, targetEditorType);
-                                    vscode.window.showInformationMessage(`全局规则 "${globalRule.name}" 已添加到项目规则！`);
+                                    vscode.window.showInformationMessage(`规则 "${globalRule.name}" 已添加到项目！`);
                                     this.postMessage({ command: 'rulesList', rules: await this.fileManager.listRules() });
                                 } catch (error) {
-                                    vscode.window.showErrorMessage(error instanceof Error ? error.message : '添加全局规则到项目失败。');
+                                    vscode.window.showErrorMessage(error instanceof Error ? error.message : '添加规则到项目失败。');
                                 }
                             } else {
-                                vscode.window.showErrorMessage(`未找到全局规则 "${message.ruleName}"。`);
+                                vscode.window.showErrorMessage(`未在远程库中找到规则 "${message.ruleName}"。`);
                             }
                         }
                         return;
@@ -298,7 +292,7 @@ export class RuleManagementPanelImpl {
                             const globalRule = this.globalRuleManager.getGlobalRuleByName(message.ruleName);
                             if (globalRule) {
                                 const newContent = await vscode.window.showInputBox({
-                                    prompt: `编辑全局规则 "${globalRule.name}" 的内容`,
+                                    prompt: `编辑规则 "${globalRule.name}" 的内容`,
                                     value: globalRule.content,
                                     ignoreFocusOut: true,
                                     placeHolder: '规则内容'
@@ -315,11 +309,11 @@ export class RuleManagementPanelImpl {
                                         tags = tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag !== '').slice(0, 5);
                                     }
                                     await this.globalRuleManager.saveGlobalRule(globalRule.name, newContent, tags, globalRule.editorType); // 传递 editorType
-                                    vscode.window.showInformationMessage(`全局规则 "${globalRule.name}" 更新成功！`);
+                                    vscode.window.showInformationMessage(`规则 "${globalRule.name}" 更新成功！`);
                                     this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                                 }
                             } else {
-                                vscode.window.showErrorMessage(`未找到全局规则 "${message.ruleName}"。`);
+                                vscode.window.showErrorMessage(`未找到规则 "${message.ruleName}"。`);
                             }
                         }
                         return;

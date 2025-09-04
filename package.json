@@ -61,7 +61,7 @@
         "rules-manager.globalRules": {
           "type": "array",
           "default": [],
-          "description": "全局规则列表，支持多种文件格式，通过 VS Code Settings Sync 在设备间同步",
+          "description": "规则列表支持多种文件格式，通过 VS Code Settings Sync 在设备间同步",
           "scope": "application"
         },
         "rules-manager.supportedExtensions": {
