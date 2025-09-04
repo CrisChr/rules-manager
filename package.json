@@ -1,0 +1,101 @@
+{
+  "name": "rules-manager",
+  "displayName": "Rules Manager",
+  "description": "🚀 统一管理多种 AI 编程工具的规则文件，支持多格式文件、云端同步、标签分类",
+  "version": "0.1.0",
+  "publisher": "VSCodeExtensionSpecialist",
+  "icon": "images/logo.png",
+  "author": {
+    "name": "Rules Manager Team"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/CrisChr/rules-manager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CrisChr/rules-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CrisChr/rules-manager/issues"
+  },
+  "keywords": [
+    "ai",
+    "cursor",
+    "cline",
+    "copilot",
+    "windsurf",
+    "rules",
+    "management",
+    "sync",
+    "productivity",
+    "yaml",
+    "json",
+    "markdown",
+    "xml",
+    "validation",
+    "file-watcher",
+    "typescript"
+  ],
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets",
+    "Machine Learning",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rules-manager.openRulesPanel",
+        "title": "Rules Manager: Open Rules Manager Panel"
+      }
+    ],
+    "configuration": {
+      "title": "Rules Manager",
+      "properties": {
+        "rules-manager.globalRules": {
+          "type": "array",
+          "default": [],
+          "description": "全局规则列表，支持多种文件格式，通过 VS Code Settings Sync 在设备间同步",
+          "scope": "application"
+        },
+        "rules-manager.supportedExtensions": {
+          "type": "array",
+          "default": [".md", ".yaml", ".yml", ".json", ".txt", ".xml"],
+          "description": "支持的规则文件扩展名列表（用户可自定义添加）",
+          "scope": "application"
+        },
+        "rules-manager.maxFileNameLength": {
+          "type": "number",
+          "default": 50,
+          "description": "规则文件名最大长度限制",
+          "scope": "application",
+          "minimum": 10,
+          "maximum": 100
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.82.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.47.0",
+    "typescript": "^5.1.6"
+  }
+}

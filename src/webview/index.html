@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>规则管理</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{cspSource}} 'unsafe-inline'; img-src {{cspSource}} https:; script-src {{cspSource}} 'unsafe-inline';">
+    <link rel="stylesheet" href="{{styleUri}}">
+</head>
+<body>
+    <h1>规则管理面板</h1>
+    <p>欢迎来到规则管理面板！</p>
+    <div class="form-group">
+        <label for="rule-type-select">选择规则类型:</label>
+        <select id="rule-type-select">
+            <option value="Cursor">Cursor 规则</option>
+            <option value="VSCodeCopilot">VS Code / GitHub Copilot 规则</option>
+            <option value="Windsurf">Windsurf 规则</option>
+            <option value="Cline">Cline 规则</option>
+        </select>
+    </div>
+    <div class="form-group" id="file-format-group">
+        <label for="file-format-select">选择文件格式:</label>
+        <select id="file-format-select">
+            <option value=".md">Markdown (.md)</option>
+            <option value=".yaml">YAML (.yaml)</option>
+            <option value=".yml">YAML (.yml)</option>
+            <option value=".json">JSON (.json)</option>
+            <option value=".txt">文本 (.txt)</option>
+            <option value=".xml">XML (.xml)</option>
+        </select>
+    </div>
+    <button id="create-rule-button">新增规则</button>
+
+    <h2>远程规则列表（通过VS Code账号同步）</h2>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="搜索规则名称或标签...">
+        <button id="search-button">搜索</button>
+    </div>
+
+    <ul id="global-rules-list">
+        <li>加载中...</li>
+    </ul>
+
+    <div id="project-rules-list-container">
+        <h2 class="project-rules-header">
+            项目规则文件列表
+        </h2>
+        <p id="project-rules-loading" style="display: none;">加载中...</p>
+        <ul id="rules-list">
+            <!-- 规则文件将在此处加载 -->
+        </ul>
+    </div>
+
+    <script src="{{scriptUri}}"></script>
+</body>
+</html>
