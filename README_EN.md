@@ -15,8 +15,6 @@
 
 Supports rule management for mainstream AI programming tools like Cursor, Cline, VS Code Copilot, and Windsurf, providing features such as cloud sync, tag classification, and one-click add to local projects.
 
-[Changelog](/CHANGELOG.md)
-
 [Examples](/EXAMPLES.md)
 
 ## ✨ Core Features
