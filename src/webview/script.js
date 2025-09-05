@@ -6,7 +6,13 @@ let projectRulesLoading; // 声明为全局变量
 
 // 初始化 projectRulesLoading 变量
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM 内容已加载');
     projectRulesLoading = document.getElementById('project-rules-loading');
+    console.log('projectRulesLoading 元素:', projectRulesLoading);
+
+    // 发送 webview 准备就绪消息
+    console.log('发送 webviewReady 消息');
+    vscode.postMessage({ command: 'webviewReady' });
 });
 
 const handleError = (error) => {
@@ -261,13 +267,7 @@ try {
         searchSourceSelect.addEventListener('change', performSearch); // 来源选择框变化时也触发搜索
     }
 
-    vscode.postMessage({ command: 'getGlobalRules' }); // 初始加载全局规则
-
-    // 初始加载项目规则时显示加载中
-    if (projectRulesLoading) {
-        projectRulesLoading.style.display = 'block';
-    }
-    vscode.postMessage({ command: 'getRules' }); // 初始加载项目规则
+    // 移除重复的初始化代码，现在通过 webviewReady 消息处理
 } catch (error) {
     handleError(error);
 }

@@ -2,7 +2,7 @@
   "name": "rules-manager",
   "displayName": "Rules Manager",
   "description": "🚀 统一管理多种 AI 编程工具的规则文件，支持多格式文件、云端同步、标签分类",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "BreakingRed",
   "icon": "images/logo.png",
   "author": {
@@ -82,8 +82,9 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run compile && npm run copy-webview",
     "compile": "tsc -p ./",
+    "copy-webview": "mkdir -p out/webview && cp -r src/webview/* out/webview/",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts"

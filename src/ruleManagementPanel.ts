@@ -77,7 +77,11 @@ export class RuleManagementPanelImpl {
             vscode.ViewColumn.One,
             {
                 enableScripts: true,
-                localResourceRoots: [vscode.Uri.joinPath(this.extensionUri, 'src', 'webview')]
+                localResourceRoots: [
+                    vscode.Uri.joinPath(this.extensionUri, 'src', 'webview'),
+                    vscode.Uri.joinPath(this.extensionUri, 'out', 'webview'),
+                    vscode.Uri.joinPath(this.extensionUri, 'webview')
+                ]
             }
         );
     }
