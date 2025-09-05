@@ -7,7 +7,7 @@
 [中文](./README.md)
 [English](./README_EN.md)
 
-<a href="https://www.buymeacoffee.com/ponyred"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=ponyred&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+[![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=ponyred&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/ponyred)
 
 
 🚀 **一个强大的 VS Code 扩展，用于统一管理多种 AI 编程工具的规则文件**
