@@ -7,6 +7,9 @@
 [中文](./README.md)
 [English](./README_EN.md)
 
+<a href="https://www.buymeacoffee.com/ponyred"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=ponyred&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+
+
 🚀 **一个强大的 VS Code 扩展，用于统一管理多种 AI 编程工具的规则文件**
 
 支持 Cursor、Cline、VS Code Copilot、Windsurf 等主流 AI 编程工具的规则管理，提供云端同步、标签分类、一键添加到本地等功能。
