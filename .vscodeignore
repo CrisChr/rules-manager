@@ -1,5 +1,6 @@
 .vscode/**
 .vscode-test/**
+.vscode-test-web/**
 src/**
 !src/webview/**
 .gitignore
@@ -10,6 +11,7 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 node_modules/**
+**/node_modules/**
 *.vsix
 .DS_Store
 Thumbs.db
