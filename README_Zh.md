@@ -15,7 +15,7 @@
 
 支持 Cursor、Cline、VS Code Copilot、Windsurf 等主流 AI 编程工具的规则管理，提供云端同步、标签分类、一键添加到本地等功能。
 
-[参考用例](/EXAMPLES.md)
+[参考用例](/EXAMPLES_Zh.md)
 
 ## ✨ 核心特性
 
