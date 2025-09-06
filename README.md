@@ -1,180 +1,180 @@
+---
+
 # Rules Manager
 
 ![Visual Studio Code](https://img.shields.io/badge/VS%20Code-^1.82.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue.svg)
 
-[中文](./README.md)
-[English](./README_EN.md)
+[中文](./README_Zh.md)
+[English](./README.md)
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=ponyred&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/ponyred)
 
+🚀 **A powerful VS Code extension for unified management of rule files for various AI programming tools**
 
-🚀 **一个强大的 VS Code 扩展，用于统一管理多种 AI 编程工具的规则文件**
+Supports rule management for mainstream AI programming tools like Cursor, Cline, VS Code Copilot, and Windsurf, providing features such as cloud sync, tag classification, and one-click add to local projects.
 
-支持 Cursor、Cline、VS Code Copilot、Windsurf 等主流 AI 编程工具的规则管理，提供云端同步、标签分类、一键添加到本地等功能。
+[Examples](/EXAMPLES.md)
 
-[参考用例](/EXAMPLES.md)
+## ✨ Core Features
 
-## ✨ 核心特性
+### 🔄 **Remote Rule Sync**
+- **VS Code Settings Sync Integration**: Automatically sync rules via your VS Code account.
+- **Seamless Cross-Device Experience**: Access your rule library by logging into your VS Code account on any device.
+- **Real-time Sync**: Rule modifications are automatically synced to the cloud, no manual action required.
 
-### 🔄 **规则远程同步**
-- **VS Code Settings Sync 集成**：通过 VS Code 账号自动同步规则
-- **跨设备无缝体验**：在任何设备上登录 VS Code 账号即可获取你的规则库
-- **实时同步**：规则修改后自动同步到云端，无需手动操作
+### 🎯 **Multi-Platform Rule Support**
+- **Cursor Rules**: Manage rule files under `.cursor/rules/`.
+- **Cline Rules**: Manage rule files under `.clinerules/`.
+- **VS Code Copilot Rules**: Manage rule files under `.github/`.
+- **Windsurf Rules**: Manage rule files under `.windsurf/rules/`.
 
-### 🎯 **多平台规则支持**
-- **Cursor 规则**：管理 `.cursor/rules/` 下的规则文件
-- **Cline 规则**：管理 `.clinerules/` 下的规则文件
-- **VS Code Copilot 规则**：管理 `.github/` 下的规则文件
-- **Windsurf 规则**：管理 `.windsurf/rules/` 下的规则文件
+### 📄 **Multi-Format File Support**
+- **Markdown** (`.md`) - Traditional documentation format.
+- **YAML** (`.yaml`, `.yml`) - Configuration file format.
+- **JSON** (`.json`) - Structured data format.
+- **XML** (`.xml`) - Markup language format.
+- **Text** (`.txt`) - Plain text format.
+- **User-Defined** - Supports any file extension.
 
-### 📄 **多格式文件支持**
-- **Markdown** (`.md`) - 传统文档格式
-- **YAML** (`.yaml`, `.yml`) - 配置文件格式
-- **JSON** (`.json`) - 结构化数据格式
-- **XML** (`.xml`) - 标记语言格式
-- **文本** (`.txt`) - 纯文本格式
-- **用户自定义** - 支持任意文件扩展名
+### 📋 **Intelligent Rule Management**
+- **Visual Panel**: Manage all rules through an intuitive web interface.
+- **Smart Categorization**: Automatically identifies rule types and displays them in categories.
+- **Quick Search**: Supports fast searching by name, tag, and source.
+- **One-Click Add**: Add cloud rules to the current project with a single click.
+- **Filename Validation**: Intelligently validates filename length and character legality.
+- **Real-time Monitoring**: Automatically detects file changes and refreshes the rule list.
 
-### 📋 **智能规则管理**
-- **可视化面板**：直观的 Web 界面管理所有规则
-- **智能分类**：自动识别规则类型并分类显示
-- **快速搜索**：支持按名称、标签、来源快速查找规则
-- **一键添加**：将云端规则一键添加到当前项目
-- **文件名验证**：智能验证文件名长度和字符合法性
-- **实时监听**：自动检测文件变化并刷新规则列表
+### 🏷️ **Tagging System**
+- **Rule Tagging**: Add up to 5 custom tags to each rule.
+- **Tag-Based Search**: Quickly filter relevant rules using tags.
+- **Source Identification**: Automatically marks the source platform of a rule.
 
-### 🏷️ **标签系统**
-- **规则标记**：为规则添加最多 5 个自定义标签
-- **标签搜索**：通过标签快速筛选相关规则
-- **来源标识**：自动标记规则的来源平台
+## 🚀 Quick Start
 
-## 🚀 快速开始
+### Install Extension
+1. Search for "Rules Manager" in the VS Code Marketplace.
+2. Click "Install" and reload VS Code.
 
-### 安装扩展
-1. 在 VS Code 扩展市场搜索 "Rules Manager"
-2. 点击安装并重新加载 VS Code
+### Basic Usage
+1. **Open the Rules Manager Panel**
+   - Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac).
+   - Search for and execute `Rules Manager: Open Rules Manager Panel`.
 
-### 基本使用
-1. **打开规则管理面板**
-   - 按 `Ctrl+Shift+P` (Windows/Linux) 或 `Cmd+Shift+P` (Mac)
-   - 搜索并执行 `Rules Manager: Open Rules Manager Panel`
+2. **Create a New Rule**
+   - Click the "New Rule" button in the panel.
+   - Select the rule type and file format (multiple formats supported).
+   - Enter a filename (length and character legality are automatically validated).
+   - Start writing your rule content.
 
-2. **创建新规则**
-   - 在面板中点击 "新增规则" 按钮
-   - 选择规则类型和文件格式（支持多种格式）
-   - 输入文件名（自动验证长度和字符合法性）
-   - 开始编写你的规则内容
+3. **Save Rule to the Cloud**
+   - Click the "Save to Cloud" button next to a project rule.
+   - Add tags for better organization.
+   - The rule will be automatically synced to the cloud.
 
-3. **保存规则到云端**
-   - 点击项目规则旁的 "保存到云端" 按钮
-   - 添加标签便于分类管理
-   - 规则将自动同步到云端
+## 📖 Detailed Features
 
-## 📖 详细功能
+### Project Rule Management
+- **Auto-Detection**: Automatically scans for various rule files within the project.
+- **Quick Edit**: Click to open and edit a rule file directly.
+- **Smart Creation**: Intelligently recommends rule types based on the current project environment.
 
-### 项目规则管理
-- **自动检测**：自动扫描项目中的各类规则文件
-- **快速编辑**：点击即可打开规则文件进行编辑
-- **智能创建**：根据当前项目环境智能推荐规则类型
+### Cloud Rule Library
+- **Rule Collection**: Save excellent project rules to the remote library.
+- **Cross-Project Reusability**: Quickly apply rules in any project.
+- **Version Management**: Automatically records creation and modification times for rules.
 
-### 云端规则库
-- **规则收藏**：将优秀的项目规则保存到远程库
-- **跨项目复用**：在任何项目中快速应用规则
-- **版本管理**：自动记录规则的创建和修改时间
+### Sync Functionality
+- **Settings Sync**: Reliable synchronization based on VS Code Settings Sync.
+- **Automatic Backup**: Rule data is securely stored in the Microsoft cloud.
+- **Multi-Device Support**: Full support for Windows, Mac, and Linux platforms.
 
-### 同步功能
-- **设置同步**：基于 VS Code Settings Sync 的可靠同步机制
-- **自动备份**：规则数据安全存储在 Microsoft 云端
-- **多设备支持**：Windows、Mac、Linux 全平台支持
+## 🛠️ Supported Rule Types
 
-## 🛠️ 支持的规则类型
+| Platform | File Location | Supported Formats | Description |
+|---|---|---|---|
+| **Cursor** | `.cursor/rules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Rules for the Cursor AI programming assistant. |
+| **Cline** | `.clinerules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Rules for the Cline AI assistant. |
+| **VS Code Copilot** | `.github/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Rules for GitHub Copilot. |
+| **Windsurf** | `.windsurf/rules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Rules for Windsurf AI. |
 
-| 平台 | 文件位置 | 支持格式 | 说明 |
-|------|----------|----------|------|
-| **Cursor** | `.cursor/rules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Cursor AI 编程助手规则 |
-| **Cline** | `.clinerules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Cline AI 助手规则 |
-| **VS Code Copilot** | `.github/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | GitHub Copilot 规则 |
-| **Windsurf** | `.windsurf/rules/` | `.md`, `.yaml`, `.yml`, `.json`, `.txt`, `.xml` | Windsurf AI 规则 |
+### 📝 File Format Features
+- **Flexible Format Choice**: Users can freely choose any file format.
+- **Smart Templates**: Automatically generates appropriate initial content based on the file format.
+- **Format Validation**: Automatically validates filename legality upon creation (≤50 characters, no illegal characters).
+- **Real-time Monitoring**: Supports file change detection for all formats.
 
-### 📝 文件格式特性
-- **灵活格式选择**：用户可自由选择任意文件格式
-- **智能模板**：根据文件格式自动生成适当的初始内容
-- **格式验证**：创建时自动验证文件名合法性（长度≤50字符，无非法字符）
-- **实时监听**：支持所有格式的文件变化检测
+## 🔧 Configuration
 
-## 🔧 配置说明
+### VS Code Settings Sync Setup
+1. **Enable Sync**
+   - Press `Cmd+Shift+P` to open the Command Palette.
+   - Search for "Settings Sync: Turn On".
+   - Select the content you want to sync (ensure "Settings" is included).
 
-### VS Code Settings Sync 设置
-1. **启用同步**
-   - 按 `Cmd+Shift+P` 打开命令面板
-   - 搜索 "Settings Sync: Turn On"
-   - 选择要同步的内容（确保包含 Settings）
+2. **Log In to Your Account**
+   - Supports both Microsoft and GitHub accounts.
+   - Choose your preferred login method.
 
-2. **登录账号**
-   - 支持 Microsoft 账号和 GitHub 账号
-   - 选择你偏好的登录方式
+3. **Verify Sync**
+   - Search for `rules-manager.globalRules` in the settings.
+   - Check if the rule data is synced correctly.
 
-3. **验证同步**
-   - 在设置中搜索 `rules-manager.globalRules`
-   - 查看规则数据是否正确同步
+## 📋 Use Cases
 
-## 📋 使用场景
+### For Individual Developers
+- **Build a Rule Library**: Accumulate and manage a personal library of AI prompts.
+- **Quick Project Kickstarts**: Quickly apply mature rule configurations to new projects.
+- **Cross-Device Development**: Maintain a consistent development experience across different devices.
 
-### 个人开发者
-- **规则库建设**：积累和管理个人的 AI 提示词库
-- **项目快速启动**：新项目快速应用成熟的规则配置
-- **跨设备开发**：在不同设备间保持一致的开发体验
+### For Team Collaboration
+- **Standardize Rules**: Share a unified standard of AI rules among team members.
+- **Share Best Practices**: Share team best practices through rules.
+- **Onboard New Members Quickly**: New team members can quickly obtain project rule configurations.
 
-### 团队协作
-- **规则标准化**：团队成员共享统一的 AI 规则标准
-- **最佳实践分享**：通过规则分享团队最佳实践
-- **新人快速上手**：新团队成员快速获取项目规则配置
+### For Enterprise Use
+- **Rule Governance**: Centrally manage enterprise-level AI programming rules.
+- **Compliance Requirements**: Ensure AI-assisted programming complies with corporate standards.
+- **Increase Efficiency**: Standardized rule configurations improve development efficiency.
 
-### 企业应用
-- **规则治理**：统一管理企业级 AI 编程规则
-- **合规要求**：确保 AI 辅助编程符合企业规范
-- **效率提升**：标准化的规则配置提升开发效率
+## 🚀 Development Roadmap
 
+- [ ] **Rule Template Marketplace**: Built-in templates for common rules.
+- [ ] **Team Collaboration Features**: Support for shared team rule libraries.
+- [ ] **Rule Version Control**: History and rollback for rule changes.
+- [ ] **Intelligent Recommendations**: Recommend suitable rules based on the project type.
+- [ ] **Bulk Operations**: Support for batch import and export of rules.
 
-## 🚀 开发计划
+## 🤝 Contribution Guide
 
-- [ ] **规则模板市场**：内置常用规则模板
-- [ ] **团队协作功能**：支持团队规则库共享
-- [ ] **规则版本控制**：规则变更历史和回滚
-- [ ] **智能推荐**：基于项目类型推荐适合的规则
-- [ ] **批量操作**：支持规则的批量导入导出
+Issues and Pull Requests are welcome!
 
-## 🤝 贡献指南
-
-欢迎提交 Issue 和 Pull Request！
-
-### 开发环境设置
+### Development Environment Setup
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone <repository-url>
 cd rules-manager
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 编译项目
+# Compile the project
 npm run compile
 
-# 启动开发模式
+# Start in watch mode
 npm run watch
 ```
 
-### 测试扩展
-1. 在 VS Code 中打开项目文件夹
-2. 按 `F5` 启动扩展开发主机
-3. 在新窗口中测试扩展功能
+### Testing the Extension
+1. Open the project folder in VS Code.
+2. Press `F5` to start the Extension Development Host.
+3. Test the extension's features in the new window.
 
-## 📄 许可证
+## 📄 License
 
-MIT License - 详见 [LICENSE](LICENSE) 文件
+MIT License - See the [LICENSE](LICENSE) file for details.
 
 ---
 
-**让 AI 编程更高效，让规则管理更简单！** 🎉
+**Make AI programming more efficient, and rule management simpler!** 🎉
