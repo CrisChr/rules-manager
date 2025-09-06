@@ -9,6 +9,8 @@
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=ponyred&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/ponyred)
 
+[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1013301&theme=light&t=1757138327537)](https://www.producthunt.com/products/rules-manager?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-rules&#0045;manager)
+
 
 🚀 **一个强大的 VS Code 扩展，用于统一管理多种 AI 编程工具的规则文件**
 
