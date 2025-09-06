@@ -1,9 +1,10 @@
 import * as vscode from 'vscode';
-import { RuleManagementPanelImpl } from './ruleManagementPanel';
-import { RuleFileManagerImpl } from './ruleFileManager';
-import { GlobalRuleManager } from './globalRuleManager';
+import { RuleManagementPanelImpl } from './rules/ruleManagementPanel';
+import { RuleFileManagerImpl } from './rules/ruleFileManager';
+import { GlobalRuleManager } from './rules/globalRuleManager';
 import * as path from 'path'; // 导入 path 模块
 import { EditorType, RULE_FOLDER_MAP, SUPPORTED_RULE_EXTENSIONS } from './types'; // 导入 EditorType 和 RULE_FOLDER_MAP
+import {I18n} from './i18n'
 
 let ruleManagementPanel: RuleManagementPanelImpl | undefined;
 let ruleFileManager: RuleFileManagerImpl;
@@ -23,6 +24,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
     ruleFileManager = new RuleFileManagerImpl(workspaceRoot);
     globalRuleManager = new GlobalRuleManager();
+    I18n.init();
 
     // 定义刷新规则列表的函数
     const refreshRulesList = async () => {

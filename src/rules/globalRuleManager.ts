@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { GlobalRule, EditorType } from './types'; // 导入 EditorType
+import { GlobalRule, EditorType } from '../types'; // 导入 EditorType
 
 const GLOBAL_RULES_CONFIG_KEY = 'globalRules';
 

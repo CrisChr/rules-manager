@@ -2,7 +2,7 @@
   "name": "rules-manager",
   "displayName": "Rules Manager",
   "description": "🚀 统一管理多种 AI 编程工具的规则文件，支持多格式文件、云端同步、标签分类",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "publisher": "BreakingRed",
   "icon": "images/logo.png",
   "author": {

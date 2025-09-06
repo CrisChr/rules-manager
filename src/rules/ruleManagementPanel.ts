@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
-import { WebviewMessage, RuleFileManager, EditorType } from './types'; // 导入 EditorType, GlobalRule
+import { WebviewMessage, RuleFileManager, EditorType } from '../types'; // 导入 EditorType, GlobalRule
 import { GlobalRuleManager } from './globalRuleManager';
-import { getWebviewContent } from './webview'; // 导入 getWebviewContent 函数
+import { getWebviewContent } from '../webview/webview'; // 导入 getWebviewContent 函数
+import {I18n} from '../i18n'
 
 export class RuleManagementPanelImpl {
     private readonly panel: vscode.WebviewPanel;
@@ -19,6 +20,7 @@ export class RuleManagementPanelImpl {
         this.panel = this.createWebviewPanel();
         this.disposables.push(this.panel);
         this.setWebviewMessageListener(); // 添加消息监听器
+        I18n.init();
     }
 
     private detectEditorType(): EditorType {
@@ -73,7 +75,7 @@ export class RuleManagementPanelImpl {
     private createWebviewPanel(): vscode.WebviewPanel {
         return vscode.window.createWebviewPanel(
             'rulesManage',
-            '规则管理',
+            I18n.t('title'),
             vscode.ViewColumn.One,
             {
                 enableScripts: true,
@@ -111,27 +113,27 @@ export class RuleManagementPanelImpl {
                         // 文件名验证函数
                         const validateFileName = (value: string): string | undefined => {
                             if (!value || value.trim().length === 0) {
-                                return '文件名不能为空';
+                                return I18n.t('fileNameEmpty');
                             }
 
                             const trimmedValue = value.trim();
 
                             // 长度验证
                             if (trimmedValue.length > 50) {
-                                return `文件名长度不能超过50个字符 (当前: ${trimmedValue.length})`;
+                                return I18n.t('fileNameTooLong', trimmedValue.length.toString());
                             }
 
                             // 非法字符验证 (Windows和Unix通用的非法字符)
                             const invalidChars = /[/\\:*?"<>|]/;
                             if (invalidChars.test(trimmedValue)) {
-                                return '文件名不能包含以下字符: / \\ : * ? " < > |';
+                                return I18n.t('invalidChars');
                             }
 
                             return undefined; // 验证通过
                         };
 
                         let ruleName = await vscode.window.showInputBox({
-                            prompt: `请输入新规则的文件名 (例如: my-rule)`,
+                            prompt: I18n.t('enterRuleName'),
                             placeHolder: 'my-rule',
                             validateInput: validateFileName
                         });
@@ -167,9 +169,9 @@ export class RuleManagementPanelImpl {
 
                             try {
                                 await this.fileManager.createRule(ruleName, { content: initialContent, editorType: selectedEditorType });
-                                vscode.window.showInformationMessage(`规则文件 ${ruleName} 创建成功！`);
+                                vscode.window.showInformationMessage(I18n.t('ruleCreated', ruleName));
                             } catch (error) {
-                                vscode.window.showErrorMessage(error instanceof Error ? error.message : '创建规则文件失败。');
+                                vscode.window.showErrorMessage(error instanceof Error ? error.message : I18n.t('createRuleFailed'));
                             }
                         }
                         // 无论是否创建成功，都刷新规则列表（这样会隐藏加载指示器）
@@ -183,14 +185,17 @@ export class RuleManagementPanelImpl {
                         return;
                     case 'deleteRule': {
                         if (message.ruleName && message.editorType) {
-                            const confirm = await vscode.window.showWarningMessage(`确定要删除规则文件 "${message.ruleName}" 吗？`, { modal: true }, '删除', '取消');
-                            if (confirm === '删除') {
+                            const confirm = await vscode.window.showWarningMessage(I18n.t('confirmDelete', message.ruleName), 
+                                { modal: true }, 
+                                I18n.t('deleteButton'), 
+                                I18n.t('cancelButton'));
+                            if (confirm === I18n.t('deleteButton')) {
                                 try {
                                     await this.fileManager.deleteRule(message.ruleName, message.editorType);
-                                    vscode.window.showInformationMessage(`规则文件 ${message.ruleName} 删除成功！`);
+                                    vscode.window.showInformationMessage(I18n.t('ruleDeleted', message.ruleName));
                                     this.postMessage({ command: 'rulesList', rules: await this.fileManager.listRules() });
                                 } catch (error) {
-                                    vscode.window.showErrorMessage(error instanceof Error ? error.message : '删除规则文件失败。');
+                                    vscode.window.showErrorMessage(error instanceof Error ? error.message : I18n.t('deleteRuleFailed'));
                                 }
                             }
                         }
@@ -204,7 +209,7 @@ export class RuleManagementPanelImpl {
                             const content = await this.fileManager.getRuleContent(message.ruleName, message.editorType);
                             if (content !== undefined) {
                                 const globalRuleName = await vscode.window.showInputBox({
-                                    prompt: `请输入要保存的规则名称 (默认为 ${message.ruleName})`,
+                                    prompt: I18n.t('enterGlobalRuleName', message.ruleName),
                                     value: message.ruleName
                                 });
 
@@ -213,8 +218,8 @@ export class RuleManagementPanelImpl {
 
                                 if (globalRuleName) { // 如果用户输入了名称（没有按Esc取消）
                                     const tagsInput = await vscode.window.showInputBox({
-                                        prompt: '请输入标签，用逗号分隔 (最多5个)',
-                                        placeHolder: '例如: web, frontend, react'
+                                        prompt: I18n.t('enterTags'),
+                                        placeHolder: I18n.t('tagsPlaceholder')
                                     });
                                     let tags: string[] | undefined;
                                     if (tagsInput) {
@@ -230,28 +235,28 @@ export class RuleManagementPanelImpl {
                                     }
 
                                     await this.globalRuleManager.saveGlobalRule(globalRuleName, content, tags, message.editorType); // 传递 editorType
-                                    vscode.window.showInformationMessage(`规则 "${globalRuleName}" 已保存规则！`);
+                                    vscode.window.showInformationMessage(I18n.t('ruleSavedToGlobal', globalRuleName));
                                     this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                                 } else { // 如果用户按 Esc 取消
                                     if (isExistingGlobalRule) {
                                         // 如果是已存在的全局规则，并且用户取消了，则删除它
                                         await this.globalRuleManager.deleteGlobalRule(message.ruleName);
-                                        vscode.window.showInformationMessage(`规则 "${message.ruleName}" 已取消保存并删除。`);
+                                        vscode.window.showInformationMessage(I18n.t('ruleCancelledAndDeleted', message.ruleName));
                                         this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                                     }
                                 }
                             } else {
-                                vscode.window.showErrorMessage(`无法获取规则文件 "${message.ruleName}" 的内容。`);
+                                vscode.window.showErrorMessage(I18n.t('cannotGetRuleContent', message.ruleName));
                             }
                         }
                         return;
                     }
                     case 'deleteGlobalRule': {
                         if (message.ruleName) {
-                            const confirm = await vscode.window.showWarningMessage(`确定要删除规则 "${message.ruleName}" 吗？`, { modal: true }, '删除', '取消');
-                            if (confirm === '删除') {
+                            const confirm = await vscode.window.showWarningMessage(I18n.t('confirmDeleteGlobalRule', message.ruleName), { modal: true }, I18n.t('deleteButton'), I18n.t('cancelButton'));
+                            if (confirm === I18n.t('deleteButton')) {
                                 await this.globalRuleManager.deleteGlobalRule(message.ruleName);
-                                vscode.window.showInformationMessage(`规则 "${message.ruleName}" 删除成功！`);
+                                vscode.window.showInformationMessage(I18n.t('globalRuleDeleted', message.ruleName));
                                 this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                             }
                         }
@@ -265,13 +270,13 @@ export class RuleManagementPanelImpl {
                                     // 使用全局规则自己的 editorType，如果没有则使用当前检测到的类型作为 fallback
                                     const targetEditorType = globalRule.editorType || this.currentEditorType;
                                     await this.fileManager.addRuleFromContent(globalRule.name, globalRule.content, targetEditorType);
-                                    vscode.window.showInformationMessage(`规则 "${globalRule.name}" 已添加到项目！`);
+                                    vscode.window.showInformationMessage(I18n.t('ruleAddedToProject', globalRule.name));
                                     this.postMessage({ command: 'rulesList', rules: await this.fileManager.listRules() });
                                 } catch (error) {
-                                    vscode.window.showErrorMessage(error instanceof Error ? error.message : '添加规则到项目失败。');
+                                    vscode.window.showErrorMessage(error instanceof Error ? error.message : I18n.t('addRuleToProjectFailed'));
                                 }
                             } else {
-                                vscode.window.showErrorMessage(`未在远程库中找到规则 "${message.ruleName}"。`);
+                                vscode.window.showErrorMessage(I18n.t('ruleNotFoundInRemote', message.ruleName));
                             }
                         }
                         return;
@@ -296,15 +301,15 @@ export class RuleManagementPanelImpl {
                             const globalRule = this.globalRuleManager.getGlobalRuleByName(message.ruleName);
                             if (globalRule) {
                                 const newContent = await vscode.window.showInputBox({
-                                    prompt: `编辑规则 "${globalRule.name}" 的内容`,
+                                    prompt: I18n.t('editRuleContent', globalRule.name),
                                     value: globalRule.content,
                                     ignoreFocusOut: true,
-                                    placeHolder: '规则内容'
+                                    placeHolder: I18n.t('ruleContentPlaceholder')
                                 });
                                 if (newContent !== undefined) {
                                     const tagsInput = await vscode.window.showInputBox({
-                                        prompt: '请输入标签，用逗号分隔 (最多5个)',
-                                        placeHolder: '例如: web, frontend, react',
+                                        prompt: I18n.t('enterTags'),
+                                        placeHolder: I18n.t('tagsPlaceholder'),
                                         value: globalRule.tags ? globalRule.tags.join(', ') : '',
                                         ignoreFocusOut: true
                                     });
@@ -313,11 +318,11 @@ export class RuleManagementPanelImpl {
                                         tags = tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag !== '').slice(0, 5);
                                     }
                                     await this.globalRuleManager.saveGlobalRule(globalRule.name, newContent, tags, globalRule.editorType); // 传递 editorType
-                                    vscode.window.showInformationMessage(`规则 "${globalRule.name}" 更新成功！`);
+                                    vscode.window.showInformationMessage(I18n.t('ruleUpdated', globalRule.name));
                                     this.postMessage({ command: 'globalRulesList', globalRules: this.globalRuleManager.getGlobalRules() });
                                 }
                             } else {
-                                vscode.window.showErrorMessage(`未找到规则 "${message.ruleName}"。`);
+                                vscode.window.showErrorMessage(I18n.t('ruleNotFound', message.ruleName));
                             }
                         }
                         return;

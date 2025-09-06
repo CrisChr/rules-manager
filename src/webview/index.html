@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="{{styleUri}}">
 </head>
 <body>
+    <div class="language-switcher">
+        <button onclick="switchLanguage('zh')" class="lang-btn active" id="lang-zh">中文</button>
+        <button onclick="switchLanguage('en')" class="lang-btn" id="lang-en">English</button>
+    </div>
     <h1>规则管理面板</h1>
-    <p>欢迎来到规则管理面板！</p>
     <div class="form-group">
         <label for="rule-type-select">选择规则类型:</label>
         <select id="rule-type-select">
@@ -39,7 +42,7 @@
     </div>
 
     <ul id="global-rules-list">
-        <li>加载中...</li>
+        <li id="remote-rules-loading">加载中...</li>
     </ul>
 
     <div id="project-rules-list-container">
@@ -52,6 +55,7 @@
         </ul>
     </div>
 
+    <script src="{{i18nUri}}"></script>
     <script src="{{scriptUri}}"></script>
 </body>
 </html>

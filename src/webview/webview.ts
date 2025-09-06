@@ -50,11 +50,14 @@ export function getWebviewContent(webview: vscode.Webview, extensionUri: vscode.
     // 构建资源 URI，使用检测到的目录
     const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, webviewDir, 'styles.css'));
     const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, webviewDir, 'script.js'));
+    // 添加i18n资源URI
+    const i18nUri = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, webviewDir, 'i18n.js'));
     const cspSource = webview.cspSource;
 
     html = html.replace(/{{cspSource}}/g, cspSource);
     html = html.replace(/{{styleUri}}/g, styleUri.toString());
     html = html.replace(/{{scriptUri}}/g, scriptUri.toString());
+    html = html.replace(/{{i18nUri}}/g, i18nUri.toString());
 
     return html;
 }

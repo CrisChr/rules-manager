@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { RuleFileManager, RuleFileOptions, EditorType, RULE_FOLDER_MAP, ProjectRule, isSupportedRuleFile } from './types'; // 导入 EditorType, RULE_FOLDER_MAP, ProjectRule
+import { RuleFileManager, RuleFileOptions, EditorType, RULE_FOLDER_MAP, ProjectRule, isSupportedRuleFile } from '../types'; // 导入 EditorType, RULE_FOLDER_MAP, ProjectRule
+import { I18n } from '../i18n';
 
 export class RuleFileManagerImpl implements RuleFileManager {
     private readonly workspaceRoot: string;
@@ -29,7 +30,7 @@ export class RuleFileManagerImpl implements RuleFileManager {
         const filePath = path.join(rulesDirectory, fileName);
 
         if (fs.existsSync(filePath)) {
-            throw new Error(`文件 ${fileName} 已存在。`);
+            throw new Error(I18n.t('fileAlreadyExists', fileName));
         }
 
         fs.writeFileSync(filePath, options.content);
@@ -42,7 +43,7 @@ export class RuleFileManagerImpl implements RuleFileManager {
         const filePath = path.join(rulesDirectory, fileName);
 
         if (!fs.existsSync(filePath)) {
-            throw new Error(`文件 ${fileName} 不存在。`);
+            throw new Error(I18n.t('fileNotExists', fileName));
         }
 
         // 在删除文件之前，检查目录中是否只包含这一个文件
@@ -60,7 +61,7 @@ export class RuleFileManagerImpl implements RuleFileManager {
         // 如果之前判断出目录中只包含这一个文件，则删除目录
         if (shouldDeleteDirectory) {
             fs.rmdirSync(rulesDirectory);
-            vscode.window.showInformationMessage(`规则目录 ${path.basename(rulesDirectory)} 已删除，因为它现在是空的。`);
+            vscode.window.showInformationMessage(I18n.t('ruleDirectoryDeleted', path.basename(rulesDirectory)));
         }
     }
 
@@ -105,7 +106,7 @@ export class RuleFileManagerImpl implements RuleFileManager {
                     });
                 }
             } catch (error) {
-                console.error(`列出 ${editorType} 规则文件时发生错误:`, error);
+                console.error(I18n.t('listRulesError', editorType), error);
             }
         }
         // 移除重复项 (基于 fileName 和 editorType)
@@ -125,13 +126,13 @@ export class RuleFileManagerImpl implements RuleFileManager {
             const filePath = path.join(rulesDirectory, fileName);
 
             if (!fs.existsSync(filePath)) {
-                throw new Error(`文件 ${fileName} 不存在。`);
+                throw new Error(I18n.t('fileNotExists', fileName));
             }
 
             const document = await vscode.workspace.openTextDocument(filePath);
             await vscode.window.showTextDocument(document);
         } catch (error) {
-            throw error instanceof Error ? error : new Error('打开规则文件时发生未知错误');
+            throw error instanceof Error ? error : new Error(I18n.t('openRuleUnknownError'));
         }
     }
 
@@ -144,7 +145,7 @@ export class RuleFileManagerImpl implements RuleFileManager {
             }
             return undefined;
         } catch (error) {
-            console.error(`读取规则文件 ${fileName} 内容时发生错误:`, error);
+            console.error(I18n.t('readRuleContentError', fileName), error);
             return undefined;
         }
     }
@@ -163,16 +164,16 @@ export class RuleFileManagerImpl implements RuleFileManager {
 
         if (fs.existsSync(filePath)) {
             const choice = await vscode.window.showWarningMessage(
-                `项目中已存在 "${fileName}" 文件。您想如何处理？`,
+                I18n.t('fileExistsPrompt', fileName),
                 { modal: true },
-                '覆盖',
-                '取消'
+                I18n.t('overwrite'),
+                I18n.t('cancelButton')
             );
-            if (choice === '覆盖') {
+            if (choice === I18n.t('overwrite')) {
                 // 用户选择覆盖，继续执行写入操作
             } else {
                 // 用户选择取消，抛出错误或返回
-                throw new Error(`用户取消了添加操作。`);
+                throw new Error(I18n.t('userCancelledOperation'));
             }
         }
 
