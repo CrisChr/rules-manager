@@ -11,7 +11,7 @@
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=ponyred&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/ponyred)
 
-[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1013747&theme=light&t=1757233599329)](https://www.producthunt.com/products/ruels-manager?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ruels&#0045;manager)
+[![Product Hunt](./images/product_hunt.png)](https://www.producthunt.com/products/ruels-manager?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ruels&#0045;manager)
 
 🚀 **A powerful VS Code extension for unified management of rule files for various AI programming tools**
 

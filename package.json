@@ -2,7 +2,7 @@
   "name": "rules-manager",
   "displayName": "Rules Manager",
   "description": "🚀 A powerful VS Code extension for unified management of rule files for various AI programming tools",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "publisher": "BreakingRed",
   "icon": "images/logo.png",
   "author": {
