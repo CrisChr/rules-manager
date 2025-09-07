@@ -11,7 +11,7 @@
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=ponyred&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/ponyred)
 
-<a href="https://www.producthunt.com/products/ruels-manager?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ruels&#0045;manager" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.png?post_id=1013747&theme=light&t=1757233599329" alt="Ruels&#0032;Manager - AI&#0032;Agent&#0032;Rules&#0044;Agent&#0032;Prompts | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+<a href="https://www.producthunt.com/products/ruels-manager?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-ruels&#0045;manager" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1013747&theme=light&t=1757233599329" alt="Ruels&#0032;Manager - AI&#0032;Agent&#0032;Rules&#0044;Agent&#0032;Prompts | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 🚀 **A powerful VS Code extension for unified management of rule files for various AI programming tools**
 
